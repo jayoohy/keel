@@ -1,38 +1,26 @@
-# Dependencies
-node_modules/
-.pnp
-.pnp.js
-
-# Build outputs
-dist/
-build/
-.next/
-out/
-
-# Turbo
-.turbo/
-
-# Env files
-.env
-.env.local
-.env.*.local
-
-# Logs
-*.log
-npm-debug.log*
-
-# OS
 .DS_Store
-Thumbs.db
-
-# Editor
-.vscode/settings.json
-.idea/
-
-# Database
-*.sqlite
-*.sqlite-journal
-drizzle/meta/
-
-# Testing
-coverage/
+.env
+.env.backup
+.env.production
+.phpactor.json
+.phpunit.result.cache
+/.fleet
+/.idea
+/.nova
+/.phpunit.cache
+/.vscode
+/.zed
+/bootstrap/ssr
+/node_modules
+/public/build
+/public/hot
+/public/storage
+/storage/*.key
+/storage/pail
+/vendor
+auth.json
+Homestead.json
+Homestead.yaml
+npm-debug.log
+yarn-error.log
+.claude
