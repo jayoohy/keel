@@ -35,4 +35,16 @@ return [
         ],
     ],
 
+    'mono' => [
+        'secret_key' => env('MONO_SECRET_KEY'),
+        'public_key' => env('MONO_PUBLIC_KEY'),
+        'webhook_secret' => env('MONO_WEBHOOK_SECRET'),
+        'base_url' => env('MONO_BASE_URL', 'https://api.withmono.com'),
+    ],
+
+    'openai' => [
+        'api_key' => env('OPENAI_API_KEY'),
+        'model' => env('OPENAI_MODEL', 'gpt-4o-mini'),
+    ],
+
 ];

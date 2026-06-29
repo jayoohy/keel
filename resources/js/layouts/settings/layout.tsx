@@ -17,6 +17,16 @@ const sidebarNavItems: NavItem[] = [
         icon: null,
     },
     {
+        title: 'Two-Factor Auth',
+        url: '/settings/two-factor',
+        icon: null,
+    },
+    {
+        title: 'Preferences',
+        url: '/settings/preferences',
+        icon: null,
+    },
+    {
         title: 'Appearance',
         url: '/settings/appearance',
         icon: null,

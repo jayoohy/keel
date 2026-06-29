@@ -37,11 +37,18 @@ return [
             'throw' => false,
         ],
 
+        // Hostinger's basic shared plan has no SSH, so `php artisan storage:link`
+        // can't be run on the server. `serve` => true makes Laravel serve these
+        // files itself via a route (see FilesystemServiceProvider::serveFiles())
+        // instead of depending on the public/storage symlink. Uses a distinct
+        // URL prefix so it doesn't collide with the private `local` disk, which
+        // reserves the default `/storage` route below.
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
-            'url' => env('APP_URL').'/storage',
+            'url' => env('APP_URL').'/public-storage',
             'visibility' => 'public',
+            'serve' => true,
             'throw' => false,
         ],
 

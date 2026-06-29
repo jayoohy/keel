@@ -4,7 +4,7 @@ import { NavUser } from '@/components/nav-user';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
-import { BookOpen, Folder, LayoutGrid } from 'lucide-react';
+import { ArrowLeftRight, BookOpen, Folder, Landmark, LayoutGrid, Lightbulb, Target, Wallet, Zap } from 'lucide-react';
 import AppLogo from './app-logo';
 
 const mainNavItems: NavItem[] = [
@@ -12,6 +12,36 @@ const mainNavItems: NavItem[] = [
         title: 'Dashboard',
         url: '/dashboard',
         icon: LayoutGrid,
+    },
+    {
+        title: 'Bank Accounts',
+        url: '/bank-connections',
+        icon: Landmark,
+    },
+    {
+        title: 'Accounts',
+        url: '/accounts',
+        icon: Wallet,
+    },
+    {
+        title: 'Transactions',
+        url: '/transactions',
+        icon: ArrowLeftRight,
+    },
+    {
+        title: 'Goals',
+        url: '/goals',
+        icon: Target,
+    },
+    {
+        title: 'Rules',
+        url: '/rules',
+        icon: Zap,
+    },
+    {
+        title: 'Insights',
+        url: '/insights',
+        icon: Lightbulb,
     },
 ];
 

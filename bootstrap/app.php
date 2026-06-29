@@ -17,6 +17,13 @@ return Application::configure(basePath: dirname(__DIR__))
             HandleInertiaRequests::class,
             AddLinkHeadersForPreloadedAssets::class,
         ]);
+
+        // Mono's webhook POSTs originate from their servers, not a browser
+        // session, so they can't carry a CSRF token. Verified via a shared
+        // secret header instead (see MonoWebhookController).
+        $middleware->validateCsrfTokens(except: [
+            'webhooks/mono',
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

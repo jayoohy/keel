@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Settings;
 
 use App\Http\Controllers\Controller;
+use App\Services\Audit\AuditLogger;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -13,6 +14,8 @@ use Inertia\Response;
 
 class PasswordController extends Controller
 {
+    public function __construct(private AuditLogger $auditLogger) {}
+
     /**
      * Show the user's password settings page.
      */
@@ -37,6 +40,8 @@ class PasswordController extends Controller
         $request->user()->update([
             'password' => Hash::make($validated['password']),
         ]);
+
+        $this->auditLogger->log('password_changed', $request->user());
 
         return back();
     }
