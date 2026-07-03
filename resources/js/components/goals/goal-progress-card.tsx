@@ -1,8 +1,7 @@
 import { Link } from '@inertiajs/react';
 
 import { Badge } from '@/components/ui/badge';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { formatCurrency } from '@/lib/format-currency';
+import { formatCurrencyWhole } from '@/lib/format-currency';
 
 export interface GoalSummary {
     id: number;
@@ -27,25 +26,28 @@ export function GoalProgressCard({ goal }: { goal: GoalSummary }) {
     const percentage = target > 0 ? Math.min(Math.round((current / target) * 100), 100) : 0;
 
     return (
-        <Link href={route('goals.show', goal.id)}>
-            <Card className="transition-colors hover:bg-accent/50">
-                <CardHeader className="flex flex-row items-center justify-between">
-                    <CardTitle className="text-lg">{goal.name}</CardTitle>
-                    <Badge variant={statusVariant[goal.status]}>{goal.status}</Badge>
-                </CardHeader>
-                <CardContent className="space-y-2">
-                    <div className="bg-muted h-2 w-full overflow-hidden rounded-full">
-                        <div className="bg-primary h-full" style={{ width: `${percentage}%` }} />
-                    </div>
-                    <div className="text-muted-foreground flex justify-between text-sm">
-                        <span>
-                            {formatCurrency(current)} of {formatCurrency(target)}
-                        </span>
-                        <span>{percentage}%</span>
-                    </div>
-                    {goal.deadline && <p className="text-muted-foreground text-xs">Due {new Date(goal.deadline).toLocaleDateString()}</p>}
-                </CardContent>
-            </Card>
+        <Link
+            href={route('goals.show', goal.id)}
+            className="group border-border hover:border-accent block rounded-sm border p-4 transition-colors"
+        >
+            <div className="mb-3 flex items-center justify-between">
+                <h3 className="font-display text-base font-medium">{goal.name}</h3>
+                <Badge variant={statusVariant[goal.status]}>{goal.status}</Badge>
+            </div>
+
+            <div className="bg-secondary relative h-2.5 w-full overflow-hidden rounded-xs">
+                <div className="bg-primary h-full transition-[width]" style={{ width: `${percentage}%` }} />
+                <div className="bg-foreground absolute top-1/2 right-0 h-3.5 w-0.5 -translate-y-1/2" aria-hidden />
+            </div>
+
+            <div className="mt-2 flex items-center justify-between text-sm">
+                <span className="font-tabular text-muted-foreground">
+                    {formatCurrencyWhole(current)} <span className="text-muted-foreground/60">of</span> {formatCurrencyWhole(target)}
+                </span>
+                <span className="font-tabular font-medium">{percentage}%</span>
+            </div>
+
+            {goal.deadline && <p className="text-muted-foreground mt-1 text-xs">Due {new Date(goal.deadline).toLocaleDateString('en-NG')}</p>}
         </Link>
     );
 }

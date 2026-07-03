@@ -37,7 +37,9 @@ export default function GoalsIndex({ goals, unallocatedBalance }: GoalsIndexProp
                         <GoalProgressCard key={goal.id} goal={goal} />
                     ))}
 
-                    {goals.length === 0 && <p className="text-muted-foreground text-sm">No goals yet — create your first one.</p>}
+                    {goals.length === 0 && (
+                        <p className="text-muted-foreground text-sm">No goals yet — add one to start steering your balance toward something real.</p>
+                    )}
                 </div>
             </div>
         </AppLayout>

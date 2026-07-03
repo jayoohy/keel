@@ -1,38 +1,31 @@
-import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from 'recharts';
-
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { ChartContainer, ChartTooltip, ChartTooltipContent, type ChartConfig } from '@/components/ui/chart';
+import { formatCurrencyWhole } from '@/lib/format-currency';
 
 interface SpendingByCategoryChartProps {
     data: { category: string; total: number }[];
 }
 
-const chartConfig = {
-    total: {
-        label: 'Spent',
-        color: 'var(--chart-1)',
-    },
-} satisfies ChartConfig;
-
 export function SpendingByCategoryChart({ data }: SpendingByCategoryChartProps) {
-    return (
-        <Card>
-            <CardHeader>
-                <CardTitle>Spending by category</CardTitle>
-            </CardHeader>
-            <CardContent>
-                <ChartContainer config={chartConfig} className="max-h-64 w-full">
-                    <BarChart accessibilityLayer data={data} layout="vertical" margin={{ left: 16 }}>
-                        <CartesianGrid horizontal={false} />
-                        <XAxis type="number" hide />
-                        <YAxis dataKey="category" type="category" tickLine={false} axisLine={false} width={100} />
-                        <ChartTooltip cursor={false} content={<ChartTooltipContent indicator="line" />} />
-                        <Bar dataKey="total" fill="var(--color-total)" radius={4} />
-                    </BarChart>
-                </ChartContainer>
+    const max = Math.max(...data.map((d) => d.total), 1);
 
-                {data.length === 0 && <p className="text-muted-foreground mt-2 text-sm">No spending recorded this month yet.</p>}
-            </CardContent>
-        </Card>
+    return (
+        <div>
+            <h2 className="text-muted-foreground text-xs font-medium tracking-wide uppercase">Spending by category</h2>
+
+            {data.length === 0 ? (
+                <p className="text-muted-foreground mt-3 text-sm">No spending recorded this month yet.</p>
+            ) : (
+                <ul className="mt-3 space-y-2.5">
+                    {data.map((d) => (
+                        <li key={d.category} className="flex items-center gap-3">
+                            <span className="w-28 shrink-0 truncate text-sm">{d.category}</span>
+                            <div className="bg-secondary relative h-4 flex-1 overflow-hidden rounded-xs">
+                                <div className="bg-primary h-full" style={{ width: `${(d.total / max) * 100}%` }} />
+                            </div>
+                            <span className="font-tabular w-24 shrink-0 text-right text-sm">{formatCurrencyWhole(d.total)}</span>
+                        </li>
+                    ))}
+                </ul>
+            )}
+        </div>
     );
 }
