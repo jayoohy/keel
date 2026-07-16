@@ -28,7 +28,7 @@ export default function InsightsIndex({ insights }: { insights: PaginatedInsight
                     {insights.data.length === 0 && <p className="text-muted-foreground text-sm">No insights yet.</p>}
                 </div>
 
-                <div className="flex gap-2">
+                <div className="flex flex-wrap gap-2">
                     {insights.links.map((link, index) =>
                         link.url ? (
                             <Link

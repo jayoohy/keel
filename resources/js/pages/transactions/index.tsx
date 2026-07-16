@@ -39,7 +39,7 @@ export default function TransactionsIndex({ transactions, accounts, categories, 
             <div className="space-y-6 p-4">
                 <Heading title="Transactions" description="Search and filter every transaction across your connected accounts" />
 
-                <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-6">
+                <div className="grid grid-cols-2 gap-3 lg:grid-cols-6">
                     <Select value={filters.account_id ?? 'all'} onValueChange={(value) => updateFilter('account_id', value === 'all' ? undefined : value)}>
                         <SelectTrigger>
                             <SelectValue placeholder="All accounts" />
@@ -93,7 +93,7 @@ export default function TransactionsIndex({ transactions, accounts, categories, 
                     />
                     <Input type="date" value={filters.date_to ?? ''} onChange={(e) => updateFilter('date_to', e.target.value)} placeholder="To" />
 
-                    <div className="flex gap-2">
+                    <div className="col-span-2 flex gap-2 lg:col-span-1">
                         <Input
                             type="number"
                             value={filters.amount_min ?? ''}
@@ -111,7 +111,7 @@ export default function TransactionsIndex({ transactions, accounts, categories, 
 
                 <TransactionsTable transactions={transactions.data} categories={categories} />
 
-                <div className="flex gap-2">
+                <div className="flex flex-wrap gap-2">
                     {transactions.links.map((link, index) =>
                         link.url ? (
                             <Link

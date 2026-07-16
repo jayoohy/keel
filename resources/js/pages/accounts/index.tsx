@@ -56,8 +56,8 @@ export default function AccountsIndex({ accounts, totalBalance, accountCount }: 
                 <div className="grid gap-4">
                     {accounts.map((account) => (
                         <Card key={account.id}>
-                            <CardContent className="flex items-center justify-between p-4">
-                                <div>
+                            <CardContent className="flex items-center justify-between gap-3 p-4">
+                                <div className="min-w-0">
                                     <p className="font-medium">{account.name}</p>
                                     <p className="text-muted-foreground text-sm">
                                         {account.bank_connection?.institution_name} {account.account_number && `• ${account.account_number}`}

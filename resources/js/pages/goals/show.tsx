@@ -58,7 +58,7 @@ export default function GoalsShow({ goal, unallocatedBalance }: GoalShowProps) {
             <Head title={goal.name} />
 
             <div className="space-y-6 p-4">
-                <div className="flex items-center justify-between">
+                <div className="flex flex-wrap items-center justify-between gap-3">
                     <Heading title={goal.name} description={goal.description ?? undefined} />
                     <Button variant="outline" asChild>
                         <Link href={route('goals.edit', goal.id)}>Edit</Link>

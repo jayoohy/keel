@@ -22,7 +22,7 @@ const FACTORS: { key: keyof Omit<HealthScore, 'score'>; label: string }[] = [
 
 export function HealthScoreCard({ healthScore }: { healthScore: HealthScore | null }) {
     return (
-        <div className="flex h-full flex-col">
+        <div className="flex flex-col">
             <h2 className="text-muted-foreground text-xs font-medium tracking-wide uppercase">Financial health</h2>
 
             {healthScore ? (

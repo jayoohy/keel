@@ -36,16 +36,20 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request): array
     {
-        [$message, $author] = str(Inspiring::quotes()->random())->explode('-');
-
-        return array_merge(parent::share($request), [
+        return [
             ...parent::share($request),
             'name' => config('app.name'),
-            'quote' => ['message' => trim($message), 'author' => trim($author)],
+            // Closures are only evaluated when the prop is actually sent, so
+            // partial reloads (dashboard polling, prefetch) skip the work.
+            'quote' => function () {
+                [$message, $author] = str(Inspiring::quotes()->random())->explode('-');
+
+                return ['message' => trim($message), 'author' => trim($author)];
+            },
             'auth' => [
                 'user' => $request->user(),
             ],
-            'unreadNotificationsCount' => $request->user()?->unreadNotifications()->count() ?? 0,
-        ]);
+            'unreadNotificationsCount' => fn () => $request->user()?->unreadNotifications()->count() ?? 0,
+        ];
     }
 }

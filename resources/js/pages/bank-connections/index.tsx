@@ -56,9 +56,9 @@ export default function BankConnectionsIndex({ connections, monoPublicKey }: Ban
             <Head title="Bank accounts" />
 
             <div className="space-y-6 p-4">
-                <div className="flex items-center justify-between">
+                <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                     <Heading title="Bank accounts" description="Connect a bank account to start tracking transactions" />
-                    <Button onClick={open} disabled={!ready || form.processing}>
+                    <Button className="w-full sm:w-auto" onClick={open} disabled={!ready || form.processing}>
                         Connect a bank account
                     </Button>
                 </div>

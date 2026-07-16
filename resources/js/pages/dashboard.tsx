@@ -57,15 +57,15 @@ export default function Dashboard({ summary, spendingByCategory, trend, goals, h
 
             <div className="mx-auto flex w-full max-w-6xl flex-1 flex-col gap-8 p-4 md:p-6">
                 {/* Instrument cluster */}
-                <div className="grid grid-cols-2 gap-6 md:grid-cols-3">
+                <div className="grid grid-cols-2 gap-4 md:grid-cols-3 md:gap-6">
                     <div>
                         <p className="text-muted-foreground text-xs font-medium tracking-wide uppercase">Total balance</p>
-                        <p className="font-display mt-1 text-3xl font-medium md:text-4xl">{formatCurrencyWhole(summary.totalBalance)}</p>
+                        <p className="font-display mt-1 text-2xl font-medium sm:text-3xl md:text-4xl">{formatCurrencyWhole(summary.totalBalance)}</p>
                     </div>
                     <div>
                         <p className="text-muted-foreground text-xs font-medium tracking-wide uppercase">Net cash flow</p>
                         <p
-                            className="font-tabular mt-1 text-3xl font-medium md:text-4xl"
+                            className="font-tabular mt-1 text-2xl font-medium sm:text-3xl md:text-4xl"
                             style={{ color: cashFlowPositive ? 'var(--color-positive)' : 'var(--color-ballast)' }}
                         >
                             {cashFlowPositive ? '↑' : '↓'} {formatCurrencyWhole(Math.abs(summary.netCashFlow))}
@@ -73,7 +73,7 @@ export default function Dashboard({ summary, spendingByCategory, trend, goals, h
                     </div>
                     <div className="col-span-2 md:col-span-1">
                         <p className="text-muted-foreground text-xs font-medium tracking-wide uppercase">Savings rate</p>
-                        <p className="font-tabular mt-1 text-3xl font-medium md:text-4xl">{summary.savingsRate}%</p>
+                        <p className="font-tabular mt-1 text-2xl font-medium sm:text-3xl md:text-4xl">{summary.savingsRate}%</p>
                     </div>
                 </div>
 
@@ -90,7 +90,7 @@ export default function Dashboard({ summary, spendingByCategory, trend, goals, h
                         <IncomeExpenseTrendChart data={trend} />
                         <SpendingByCategoryChart data={spendingByCategory} />
                     </div>
-                    <div className="space-y-8 lg:col-span-2">
+                    <div className="space-y-8 self-start lg:col-span-2">
                         <HealthScoreCard healthScore={healthScore} />
 
                         {activeGoals.length > 0 && (

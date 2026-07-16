@@ -31,7 +31,7 @@ export default function RulesIndex({ rules }: { rules: RuleItem[] }) {
             <Head title="Rules" />
 
             <div className="space-y-6 p-4">
-                <div className="flex items-center justify-between">
+                <div className="flex flex-wrap items-center justify-between gap-3">
                     <Heading title="Automation rules" description="Automatically allocate money to goals as transactions come in" />
                     <Button asChild>
                         <Link href={route('rules.create')}>New rule</Link>
@@ -41,9 +41,9 @@ export default function RulesIndex({ rules }: { rules: RuleItem[] }) {
                 <div className="grid gap-4">
                     {rules.map((rule) => (
                         <Card key={rule.id}>
-                            <CardContent className="flex items-center justify-between p-4">
+                            <CardContent className="flex flex-col gap-3 p-4 sm:flex-row sm:items-center sm:justify-between">
                                 <div>
-                                    <div className="flex items-center gap-2">
+                                    <div className="flex flex-wrap items-center gap-2">
                                         <p className="font-medium">{rule.name}</p>
                                         <Badge variant={rule.is_active ? 'default' : 'secondary'}>{rule.is_active ? 'active' : 'inactive'}</Badge>
                                     </div>

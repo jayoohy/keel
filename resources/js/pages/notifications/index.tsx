@@ -43,9 +43,12 @@ export default function NotificationsIndex({ notifications }: { notifications: P
 
                 <div className="space-y-2">
                     {notifications.data.map((notification) => (
-                        <Card key={notification.id} className={notification.read_at ? 'opacity-70' : undefined} onMouseEnter={() => markRead(notification.id)}>
+                        <Card key={notification.id} className="cursor-pointer" onClick={() => markRead(notification.id)}>
                             <CardContent className="p-4">
-                                <p className="text-sm">{notification.data.message}</p>
+                                <div className="flex items-center justify-between gap-2">
+                                    <p className="text-sm">{notification.data.message}</p>
+                                    {notification.read_at && <span className="text-muted-foreground shrink-0 text-xs">Read</span>}
+                                </div>
                                 <p className="text-muted-foreground text-xs">{new Date(notification.created_at).toLocaleString()}</p>
                             </CardContent>
                         </Card>
@@ -54,7 +57,7 @@ export default function NotificationsIndex({ notifications }: { notifications: P
                     {notifications.data.length === 0 && <p className="text-muted-foreground text-sm">No notifications yet.</p>}
                 </div>
 
-                <div className="flex gap-2">
+                <div className="flex flex-wrap gap-2">
                     {notifications.links.map((link, index) =>
                         link.url ? (
                             <Link

@@ -32,17 +32,25 @@ export function InsightCard({ insight }: { insight: InsightItem }) {
     };
 
     return (
-        <Card className={insight.is_read ? 'opacity-70' : undefined} onMouseEnter={markRead}>
+        <Card className="cursor-pointer" onClick={markRead}>
             <CardContent className="flex items-start justify-between gap-4 p-4">
                 <div className="space-y-1">
                     <div className="flex items-center gap-2">
                         <Badge variant={typeVariant[insight.type]}>{insight.type.replace('_', ' ')}</Badge>
                         <p className="text-sm font-medium">{insight.title}</p>
+                        {insight.is_read && <span className="text-muted-foreground text-xs">Read</span>}
                     </div>
                     <p className="text-muted-foreground text-sm">{insight.message}</p>
                     <p className="text-muted-foreground text-xs">{new Date(insight.created_at).toLocaleString()}</p>
                 </div>
-                <Button variant="ghost" size="sm" onClick={dismiss}>
+                <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        dismiss();
+                    }}
+                >
                     Dismiss
                 </Button>
             </CardContent>

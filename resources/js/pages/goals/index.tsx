@@ -25,7 +25,7 @@ export default function GoalsIndex({ goals, unallocatedBalance }: GoalsIndexProp
             <Head title="Goals" />
 
             <div className="space-y-6 p-4">
-                <div className="flex items-center justify-between">
+                <div className="flex flex-wrap items-center justify-between gap-3">
                     <Heading title="Savings goals" description={`${formatCurrency(unallocatedBalance)} unallocated`} />
                     <Button asChild>
                         <Link href={route('goals.create')}>New goal</Link>
