@@ -34,10 +34,15 @@ use Illuminate\Support\Str;
 class DemoDataSeeder extends Seeder
 {
     private const DEMO_EMAIL = 'ogukahjoy@gmail.com';
+    private string $demoEmail;
+    
+    public function __construct() {
+        $this->demoEmail = env('DEMO_EMAIL', self::DEMO_EMAIL);
+    }
 
     public function run(): void
     {
-        $user = User::where('email', self::DEMO_EMAIL)->first() ?? User::firstOrFail();
+        $user = User::where('email', $this->demoEmail)->first() ?? User::firstOrFail();
 
         if (! $user->hasVerifiedEmail()) {
             $user->markEmailAsVerified();
